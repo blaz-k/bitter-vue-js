@@ -8,8 +8,6 @@
 </template>
 
 <script>
-/*
-import axios from "axios";*/
 import AllBitts from "./components/AllBitts";
 
 export default {
