@@ -1,7 +1,18 @@
 <template>
   <div>
     <h2>Bitts forum</h2>
-    <button @click="getAllBitts">Show All Bitts</button>
+    <button class="showBittsButton" @click="getAllBitts">Show All Bitts</button>
+    <div class="addNewBitt">
+     <input id="usernameInput" type="text" placeholder="Username" />
+     <input
+       id="textInput"
+       class="input-text"
+       type="text"
+       placeholder="Enter your text here"
+     />
+     <button @click="newBitt" class="newBittButton">Submit new bit</button>
+    </div>
+
     <div v-bind:key="bitt.id" v-for="bitt in bitts">
       <div class="all-bits">
         <div class="information">
@@ -23,7 +34,6 @@
 
 <script>
 import axios from "axios";
-
 export default {
   name: "AllBitts",
   data() {
@@ -38,11 +48,20 @@ export default {
       console.log(response.data);
       this.bitts = response.data;
     },
+    newBitt() {
+      let usernameInput = document.getElementById("usernameInput").value;
+      let textInput = document.getElementById("textInput").value;
+      console.log(textInput);
+      console.log(usernameInput);
+    },
   },
 };
 </script>
 
 <style scoped>
+.addNewBitt {
+ margin-top: 50px;
+}
 .information {
   text-align: left;
   margin-top: 40px;
@@ -64,7 +83,7 @@ export default {
   border-radius: 13px;
   margin: 8px 0px;
 }
-button {
+.showBittsButton {
   display: flex;
   margin: auto;
   margin-top: 50px;
@@ -73,6 +92,7 @@ button {
   text-shadow: 0px 1px;
   font-size: 15px;
 }
+
 
 h2 {
   font-size: 40px;
