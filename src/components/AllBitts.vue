@@ -6,7 +6,7 @@
       <div class="all-bits">
         <div class="information">
           <div class="created">
-            {{ bitts.username }}
+            {{ bitt.username }}
           </div>
           <div class="username"></div>
         </div>
