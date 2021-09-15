@@ -133,5 +133,6 @@ h2 {
 }
 .addNewBitt {
   margin: 10px;
+  padding-top: 50px;
 }
 </style>
