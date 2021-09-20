@@ -1,11 +1,39 @@
 <template>
   <div>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Home</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Post new bitt</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+          </ul>
+          <form class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+    </nav>
     <h2>Bitts</h2>
     <button class="showBittsButton" @click="getAllBitts">Show All Bitts</button>
     <div class="addNewBitt">
-      <input id="usernameInput" type="text" placeholder="Username" />
+      <input
+        id="usernameInput"
+        v-model="usernameInput"
+        type="text"
+        placeholder="Username"
+      />
       <input
         id="textInput"
+        v-model="textInput"
         class="input-text"
         type="text"
         placeholder="Enter your text here"
@@ -14,18 +42,11 @@
     </div>
 
     <div v-bind:key="bitt.id" v-for="bitt in bitts">
-      <div class="all-bits">
-        <div class="information">
-          <!--
-          <div class="created">
-            {{ bitt.created}}
-          </div>-->
-          <div class="username">
-            {{ bitt.username }}
-          </div>
-        </div>
-        <div class="text">
-          {{ bitt.text }}
+      <div class="card" style="width: 100%;" >
+        <div class="card-body">
+          <h5 class="card-title" >{{ bitt.username }}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">{{ bitt.created }}</h6>
+          <p class="card-text">{{ bitt.text }}</p>
         </div>
       </div>
     </div>
@@ -39,6 +60,8 @@ export default {
   data() {
     return {
       bitts: [],
+      usernameInput: "",
+      textInput: "",
     };
   },
   methods: {
@@ -49,13 +72,9 @@ export default {
       this.bitts = response.data;
     },
     async newBitt() {
-      let usernameInput = document.getElementById("usernameInput").value;
-      let textInput = document.getElementById("textInput").value;
-      console.log(textInput);
-      console.log(usernameInput);
       let res = await axios.post("http://localhost:5000/create-bitt", {
-        text: textInput,
-        username: usernameInput,
+        text: this.textInput,
+        username: this.usernameInput,
       });
       let data = res.data;
       console.log(data);
@@ -68,29 +87,7 @@ export default {
 .addNewBitt {
   margin-top: 50px;
 }
-.information {
-  text-align: left;
-  margin-top: 40px;
-}
 
-.information .username {
-  padding: 5px 1px;
-  font-size: 22px;
-  font-weight: 700;
-  color: rgb(189, 8, 8);
-  margin-left: 10px;
-}
-
-.text {
-  display: inline-block;
-  padding: 5px 15px;
-  font-size: 18px;
-  font-weight: 500;
-  background-color: rgba(189, 165, 165, 0.733);
-  border-radius: 13px;
-  margin: 8px 0px;
-  margin-left: 10px;
-}
 .showBittsButton {
   display: flex;
   margin: auto;
