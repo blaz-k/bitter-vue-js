@@ -24,7 +24,7 @@ export default {
       console.log(date.getFullYear());
       let month = date.getMonth() + 1;
 
-      return date.getDay() + " " + month + " " + date.getFullYear();
+      return date.getDay() + " / " + month + " / " + date.getFullYear();
     },
   },
 };
